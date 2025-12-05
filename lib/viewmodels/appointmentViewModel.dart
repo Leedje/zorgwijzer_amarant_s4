@@ -9,8 +9,9 @@ class AppointmentViewModel extends ChangeNotifier {
       ..title = "Doktersafspraak"
       ..resident = "Bram Jansen"
       ..date = DateTime(2025, 12, 7)
-      ..time = TimeOfDay(hour: 9, minute: 0)
-      ..duration = Duration(minutes: 30)
+      ..time =
+          DateTime(2025, 12, 7, 9, 0)
+      ..duration = const Duration(minutes: 30)
       ..location = "Amarant Kliniek"
       ..priority = "Hoog",
 
@@ -19,8 +20,9 @@ class AppointmentViewModel extends ChangeNotifier {
       ..title = "Medicatiecontrole"
       ..resident = "Sophie de Vries"
       ..date = DateTime(2025, 12, 7)
-      ..time = TimeOfDay(hour: 11, minute: 0)
-      ..duration = Duration(minutes: 20)
+      ..time =
+          DateTime(2025, 12, 7, 11, 0) 
+      ..duration = const Duration(minutes: 20)
       ..location = "Apotheek Tilburg"
       ..priority = "Medium",
 
@@ -29,8 +31,9 @@ class AppointmentViewModel extends ChangeNotifier {
       ..title = "Wandeling in het park"
       ..resident = "Jan Peters"
       ..date = DateTime(2025, 12, 7)
-      ..time = TimeOfDay(hour: 14, minute: 30)
-      ..duration = Duration(minutes: 45)
+      ..time =
+          DateTime(2025, 12, 7, 14, 30)
+      ..duration = const Duration(minutes: 75)
       ..location = "Spoorpark"
       ..priority = "Laag",
 
@@ -39,8 +42,9 @@ class AppointmentViewModel extends ChangeNotifier {
       ..title = "Telefonisch overleg huisarts"
       ..resident = "Maria van Dijk"
       ..date = DateTime(2025, 12, 5)
-      ..time = TimeOfDay(hour: 10, minute: 15)
-      ..duration = Duration(minutes: 15)
+      ..time =
+          DateTime(2025, 12, 5, 10, 15) 
+      ..duration = const Duration(minutes: 15)
       ..location = "Telefoon"
       ..priority = "Hoog",
   ];
@@ -51,5 +55,10 @@ class AppointmentViewModel extends ChangeNotifier {
     return _appointments
         .where((appointment) => isSameDay(appointment.date, date))
         .toList();
+  }
+
+  List<AppointmentDTO> getAllAppointments(){
+   return List.empty();
+   //load appointments from db
   }
 }

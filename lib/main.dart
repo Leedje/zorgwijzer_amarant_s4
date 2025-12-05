@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:zorgwijzer_amarant_s4/config/router.dart';
 import 'package:zorgwijzer_amarant_s4/viewmodels/appointmentViewModel.dart';
+import 'package:zorgwijzer_amarant_s4/viewmodels/reminderViewModel.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 void main() {
-  initializeDateFormatting().then((_) => runApp(MainApp()));
+  initializeDateFormatting().then((_) => runApp(const MainApp()));
 }
 
 class MainApp extends StatelessWidget {
@@ -13,16 +14,20 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (appointmentContext) => AppointmentViewModel(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (appointmentContext) => AppointmentViewModel()),
+        ChangeNotifierProvider(create: (reminderContext) => ReminderViewModel()),
+      ],
       child: MaterialApp.router(
         routerConfig: appRouter,
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: 
-          Colors.red),
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: Colors.red, 
+          ),
           brightness: Brightness.light,
         ),
-        ),
+      ),
     );
   }
 }
