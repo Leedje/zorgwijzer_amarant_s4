@@ -5,8 +5,8 @@ class AppointmentDTO{
   String title = '';
   String resident = '';
   DateTime date = DateTime.now();
-  DateTimeRange timeRange = DateTimeRange(start: DateTime.now(), end: DateTime.now());
+  TimeOfDay time = TimeOfDay.now();
   Duration duration = Duration();
   String location = '';
-  String note = '';
+  String priority = '';
 }

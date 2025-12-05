@@ -14,7 +14,7 @@ class MainNavLayout extends StatelessWidget {
     return Scaffold(
       body: SafeArea(child: child),
       appBar: AppBar(
-        leading: Icon(Icons.home),
+        leading: Icon(Icons.home_filled, color: Colors.white,),
         title: Text(pageTitle),
         backgroundColor: Color(0XFF00BBA7),
       ),
@@ -28,14 +28,14 @@ class MainNavLayout extends StatelessWidget {
               context.go('/');
               break;
             case 1:
-            pageTitle = 'Agena';
-              context.go('/weeklyplanner');
+            pageTitle = 'Agenda';
+              context.go('/appointments');
               break;
           }
         },
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home_filled)),
-          BottomNavigationBarItem(icon: Icon(Icons.calendar_month_rounded)),
+          BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: "Start"),
+          BottomNavigationBarItem(icon: Icon(Icons.calendar_month_rounded), label: "Agenda"),
         //  BottomNavigationBarItem(icon: Icon(Icons.error_outline)), this is for eventual incident report
         ],
       ),

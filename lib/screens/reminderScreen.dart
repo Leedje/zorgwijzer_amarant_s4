@@ -9,6 +9,6 @@ class _ReminderScreenState extends State<ReminderScreen> {
   @override
   Widget build(BuildContext context) {
     
-    throw UnimplementedError();
+    return Placeholder();
   }
 }
