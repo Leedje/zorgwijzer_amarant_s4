@@ -1,12 +1,12 @@
 import 'package:zorgwijzer_amarant_s4/api/apiClient.dart';
 import 'package:zorgwijzer_amarant_s4/models/appointmentDto.dart';
 
-class WeekPlannerService{
+class AppointmentService{
 
   final ApiClient _client = ApiClient();
 
   Future<List<AppointmentDTO>> getAllAppointments () async{
-    final appointments = await _client.get('/appointment');
+    final appointments = await _client.get('/appointments');
     return (appointments as List).map(
       (appointment) => AppointmentDTO.fromJson(appointment)
     ).toList();

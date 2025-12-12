@@ -9,6 +9,7 @@ class ApiClient {
 
   Future<dynamic> get(String path) async {
     final response = await http.get(Uri.parse('$baseUrl$path'));
+    //add error handling for refsued network connection
     return _handleResponse(response);
   }
 

@@ -46,6 +46,15 @@ class AppointmentCard extends StatelessWidget {
           : "$start - $end (${formatDuration(appointment.duration)})";
     }
 
+    Color determinePriorityColor(String priority){
+      switch (priority) {
+        case "Hoog":
+        return Colors.red;
+        }
+
+      return Colors.black;
+    }
+
     return Container(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -95,6 +104,8 @@ class AppointmentCard extends StatelessWidget {
                       maxLines: null,
                     ),
                     Text('Locatie: ${appointment.location}'),
+                    // notulen veld om aan te geven of een verwante met de client meegaat bvb. zodat de medewerkers het niet vergeten.
+
                   ],
                 ),
               ),

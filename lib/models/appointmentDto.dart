@@ -12,7 +12,10 @@ class AppointmentDTO {
   DateTime time = DateTime.now();
   Duration duration = Duration();
   String location = '';
-  String priority = '';
+  String priority = ''; //dit moet zwaarte worden
+  //DateTime dateTime = DateTime.now();
+  // i need to extract the date and time from the datetime
+  // however, the other data isn't being displayed
 
   AppointmentDTO({
     String id = '',

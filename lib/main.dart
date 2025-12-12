@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:zorgwijzer_amarant_s4/config/router.dart';
+import 'package:zorgwijzer_amarant_s4/services/appointmentService.dart';
 import 'package:zorgwijzer_amarant_s4/viewmodels/appointmentViewModel.dart';
 import 'package:zorgwijzer_amarant_s4/viewmodels/reminderViewModel.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -16,7 +17,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (appointmentContext) => AppointmentViewModel()),
+        ChangeNotifierProvider(create: (appointmentContext) => AppointmentViewModel(AppointmentService())),
         ChangeNotifierProvider(create: (reminderContext) => ReminderViewModel()),
       ],
       child: MaterialApp.router(

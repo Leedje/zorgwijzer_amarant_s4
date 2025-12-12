@@ -20,8 +20,9 @@ class _AgendaScreen extends State<AgendaScreen> {
   void initState() {
     super.initState();
     _selectedDay = DateTime.now();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       final appointmentsContext = context.read<AppointmentViewModel>();
+      await appointmentsContext.loadSampleAppointments();
       setState(() {
         _appointments = appointmentsContext.getAppointmentsForDay(
           _selectedDay!,
@@ -96,14 +97,17 @@ class _AgendaScreen extends State<AgendaScreen> {
         Expanded(
           child: _appointments == null || _appointments!.isEmpty
               ? Center(child: Text('Geen afspraken.'))
-              : ListView(
-                  children: _appointments!
-                      .map(
-                        (appointment) =>
-                            AppointmentCard(appointment: appointment),
-                      )
-                      .toList(),
-                ),
+              : Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ListView(
+                    children: _appointments!
+                        .map(
+                          (appointment) =>
+                              AppointmentCard(appointment: appointment),
+                        )
+                        .toList(),
+                  ),
+              ),
         ),
       ],
     );
