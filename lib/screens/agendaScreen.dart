@@ -22,7 +22,7 @@ class _AgendaScreen extends State<AgendaScreen> {
     _selectedDay = DateTime.now();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       final appointmentsContext = context.read<AppointmentViewModel>();
-      await appointmentsContext.loadSampleAppointments();
+      await appointmentsContext.getAllAppointments();
       setState(() {
         _appointments = appointmentsContext.getAppointmentsForDay(
           _selectedDay!,

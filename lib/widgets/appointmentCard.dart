@@ -8,16 +8,7 @@ class AppointmentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // setCardColor(String priority){
-    //   switch (Color){
-    //     case "hoog":
-    //      Color(Colors.red),
-    //     case "medium":
-    //     Color(Colors.greenAccent),
-    //     case "laag":
-    //     Color(Colors.blueGrey)
-    //   }
-    // }
+
     String formatDuration(Duration duration) {
       if (duration.inMinutes < 60) {
         return "${duration.inMinutes} min";
@@ -50,9 +41,13 @@ class AppointmentCard extends StatelessWidget {
       switch (priority) {
         case "Hoog":
         return Colors.red;
+        case "Gemiddeld":
+        return Colors.amber.shade300;
+        case "Laag":
+        return Colors.greenAccent.shade200;
+        default: Colors.blueGrey;
         }
-
-      return Colors.black;
+      return Colors.white;
     }
 
     return Container(
@@ -73,9 +68,10 @@ class AppointmentCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Card(
+                          color: determinePriorityColor(appointment.priority),
                           child: Padding(
                             padding: const EdgeInsets.all(10),
-                            child: Text('Prioriteit'),
+                            child: Text(appointment.priority, style: TextStyle(fontWeight: FontWeight.bold),),
                           ),
                         ),
                         SizedBox(
@@ -94,11 +90,11 @@ class AppointmentCard extends StatelessWidget {
 
                     // Data Display
                     Text(
-                      formatTime(appointment.time),
+                      formatTime(appointment.dateTime),
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      '${appointment.title} met ${appointment.resident}',
+                      '${appointment.activity} met ${appointment.client}',
                       softWrap: true,
                       overflow: TextOverflow.clip,
                       maxLines: null,

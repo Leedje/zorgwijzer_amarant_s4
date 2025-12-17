@@ -6,29 +6,26 @@ part of 'appointmentDto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-AppointmentDTO _$AppointmentDTOFromJson(
-  Map<String, dynamic> json,
-) => AppointmentDTO(
-  id: json['id'] as String? ?? '',
-  title: json['title'] as String? ?? '',
-  resident: json['resident'] as String? ?? '',
-  date: json['date'] == null ? null : DateTime.parse(json['date'] as String),
-  time: json['time'] == null ? null : DateTime.parse(json['time'] as String),
-  duration: json['duration'] == null
-      ? null
-      : Duration(microseconds: (json['duration'] as num).toInt()),
-  location: json['location'] as String? ?? '',
-  priority: json['priority'] as String? ?? '',
-);
+AppointmentDTO _$AppointmentDTOFromJson(Map<String, dynamic> json) =>
+    AppointmentDTO(
+      id: json['id'] as String,
+      activity: json['activity'] as String,
+      client: json['client'] as String,
+      dateTime: DateTime.parse(json['dateTime'] as String),
+      duration: Duration(microseconds: (json['duration'] as num).toInt()),
+      location: json['location'] as String,
+      priority: json['priority'] as String,
+      isCompleted: json['isCompleted'] as bool,
+    );
 
 Map<String, dynamic> _$AppointmentDTOToJson(AppointmentDTO instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'title': instance.title,
-      'resident': instance.resident,
-      'date': instance.date.toIso8601String(),
-      'time': instance.time.toIso8601String(),
+      'activity': instance.activity,
+      'client': instance.client,
+      'dateTime': instance.dateTime.toIso8601String(),
       'duration': instance.duration.inMicroseconds,
       'location': instance.location,
       'priority': instance.priority,
+      'isCompleted': instance.isCompleted,
     };

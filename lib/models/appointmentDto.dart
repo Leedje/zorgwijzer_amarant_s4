@@ -5,33 +5,50 @@ part 'appointmentDto.g.dart';
 
 @JsonSerializable()
 class AppointmentDTO {
-  String id = '';
-  String title = '';
-  String resident = '';
-  DateTime date = DateTime.now();
-  DateTime time = DateTime.now();
-  Duration duration = Duration();
-  String location = '';
-  String priority = ''; //dit moet zwaarte worden
-  //DateTime dateTime = DateTime.now();
-  // i need to extract the date and time from the datetime
-  // however, the other data isn't being displayed
+  String id;
+  String activity;
+  String client;
+  DateTime dateTime;
+  Duration duration;
+  String location;
+  String priority;
+  bool isCompleted;
 
   AppointmentDTO({
-    String id = '',
-    String title = '',
-    String resident = '',
-    DateTime? date,
-    DateTime? time,
-    Duration? duration,
-    String location = '',
-    String priority = '',
+    required this.id,
+    required this.activity,
+    required this.client,
+    required this.dateTime,
+    required this.duration,
+    required this.location,
+    required this.priority,
+    required this.isCompleted,
   });
-
   
-  factory AppointmentDTO.fromJson(Map<String, dynamic> json) =>
-      _$AppointmentDTOFromJson(json);
+  factory AppointmentDTO.fromJson(Map<String, dynamic> json) {
+    final dto = _$AppointmentDTOFromJson(json);
 
-  Map<String, dynamic> toJson() => _$AppointmentDTOToJson(this);
+    if (json['duration'] != null){
+      dto.duration = Duration(minutes: json['duration'] as int);
+    }
+
+     if (json['dateTime'] != null) {
+      dto.dateTime = DateTime.parse(json['dateTime'] as String);
+    }
+
+    return dto;
+  }
+
+   @override
+  Map<String, dynamic> toJson() {
+    final dto = _$AppointmentDTOToJson(this);
+
+    if (dto['id'] == '') {
+      dto.remove('id');
+    }
+
+    return dto;
+  }
+
 
 }
