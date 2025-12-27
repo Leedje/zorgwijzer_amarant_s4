@@ -16,6 +16,9 @@ class _AgendaScreen extends State<AgendaScreen> {
   DateTime? _selectedDay;
   List<AppointmentDTO>? _appointments;
 
+  //automatic changes, if a new afspraak comes it might be better 
+  //to not have to reload the screen if there's a new appointment
+
   @override
   void initState() {
     super.initState();
@@ -35,6 +38,7 @@ class _AgendaScreen extends State<AgendaScreen> {
   Widget build(BuildContext context) {
     final appointmentsContext = context.watch<AppointmentViewModel>();
 
+  
     return Column(
       children: [
         TableCalendar(
@@ -95,7 +99,11 @@ class _AgendaScreen extends State<AgendaScreen> {
         ),
 
         Expanded(
-          child: _appointments == null || _appointments!.isEmpty
+          child:  _appointments == null
+          ? const Center(
+          child: Text("Kan geen verbinding maken met de server."),
+        )
+          :  _appointments!.isEmpty
               ? Center(child: Text('Geen afspraken.'))
               : Padding(
                 padding: const EdgeInsets.all(8.0),

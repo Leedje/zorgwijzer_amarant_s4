@@ -4,20 +4,20 @@ part 'reminderDto.g.dart';
 
 @JsonSerializable()
 class ReminderDTO {
-  String id = '';
-  DateTime timeSent = DateTime.now();
-  String title = '';
-  String description = '';
-  String appointmentId = '';
-  DateTime appointmentTime = DateTime.now();
+  String id;
+  String title;
+  String description;
+  String activity;
+  DateTime timeCreated;
+  DateTime appointmentTime;
 
   ReminderDTO({
-      String id = '',
-  DateTime? timeSent,
-  String title = '',
-  String description = '',
-  String appointmentId = '',
-  DateTime? appointmentTime
+  required this.id,
+   required this.title,
+   required this.description,
+   required this.activity,
+   required this.timeCreated,
+   required this.appointmentTime
   });
 
   factory ReminderDTO.fromJson(Map<String, dynamic> json) => _$ReminderDTOFromJson(json);

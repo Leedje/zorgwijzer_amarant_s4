@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 import 'apiConfig.dart';
 
 class ApiClient {
@@ -8,9 +10,16 @@ class ApiClient {
   ApiClient({this.baseUrl = baseURL});
 
   Future<dynamic> get(String path) async {
-    final response = await http.get(Uri.parse('$baseUrl$path'));
-    //add error handling for refsued network connection
-    return _handleResponse(response);
+    try {
+      final response = await http.get(Uri.parse('$baseUrl$path'));
+      return _handleResponse(response);
+    } on SocketException catch (_) {
+      return null;
+    } on ClientException catch (_) {
+      return null;
+    } catch (_) {
+      return null;
+    }
   }
 
   Future<dynamic> post(String path, Map<String, dynamic> body) async {
@@ -36,6 +45,8 @@ class ApiClient {
       throw Exception('Unauthorized');
     } else if (response.statusCode == 404) {
       throw Exception('Item Not found');
+    } else if (response.statusCode == 500 || response.statusCode == 1225) {
+      return null;
     } else {
       throw Exception('Server error: ${response.statusCode}');
     }

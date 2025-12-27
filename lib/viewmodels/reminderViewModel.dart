@@ -1,38 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:zorgwijzer_amarant_s4/models/reminderDto.dart';
+import 'package:zorgwijzer_amarant_s4/models/reminderUnsuccessfulAppointmentDto.dart';
+import 'package:zorgwijzer_amarant_s4/services/reminderService.dart';
 
 class ReminderViewModel extends ChangeNotifier {
-  final List<ReminderDTO> _reminders = [
-    ReminderDTO()
-      ..id = "r1"
-      ..title = "Doktersafspraak met Tim"
-      ..description = "Morgen moet je om 14:30 naar de huisarts met Tim."
-      ..appointmentId = "1",
+  List<ReminderDTO>? _reminders = [];
+  List<ReminderDTO>? get reminders => _reminders;
 
-    ReminderDTO()
-      ..id = "r2"
-      ..title = "Wandeling met Sasha"
-      ..description = "In 2 uren moet je met Sasha wandelen (13:25)."
-      ..appointmentId = "3",
+  final ReminderService reminderService;
+  ReminderViewModel(this.reminderService);
 
-    ReminderDTO()
-      ..id = "r3"
-      ..title = "Nieuwe afspraak ingepland"
-      ..description =
-          "Bewoner Tim heeft een bezoek met verwanten op 10 december."
-      ..appointmentId = "5",
+  Future<void> getAllReminders() async {
+    // final unsuccessfulReminders = getAllRemindersUnsuccessfulAppointments();
+    // final appointmentReminders = getAppointmentReminders();
+     _reminders = (await getAppointmentReminders());
+    //i want to combine the list, and sort on the newest appointment,
+    // meaning the reminders of unsuccessful appointments need to also have
+    //a timeCreated field.
+    //  appointmentsForDay.sort((a, b) => a.dateTime.compareTo(b.dateTime));
 
-    ReminderDTO()
-      ..id = "r4"
-      ..title = "Medicatiecontrole Sophie"
-      ..description =
-          "Herinnering: Sophie heeft een medicatiecontrole om 11:00 bij de apotheek."
-      ..appointmentId = "2",
-  ];
+    notifyListeners();
+  }
 
-  List<ReminderDTO> get reminders => _reminders;
+  Future<List<ReminderUnsuccessfulAppointmentDTO>?>
+  getAllRemindersUnsuccessfulAppointments() async {
+    return await reminderService.getAllRemindersUnsuccessfulAppointments();
+  }
 
-  List<ReminderDTO> getAllReminders() {
+  Future<List<ReminderDTO>?> getAppointmentReminders() async {
+    final _reminders = await reminderService.getAllReminders();
+    notifyListeners();
     return _reminders;
   }
 }

@@ -33,7 +33,7 @@ class AppointmentDTO {
     }
 
      if (json['dateTime'] != null) {
-      dto.dateTime = DateTime.parse(json['dateTime'] as String);
+      dto.dateTime = DateTime.parse(json['dateTime'] as String).toLocal();
     }
 
     return dto;

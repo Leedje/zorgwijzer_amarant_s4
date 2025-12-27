@@ -30,7 +30,7 @@ class ReminderCard extends StatelessWidget{
                 children: [
                   Text(reminder.title, style: TextStyle(fontWeight: FontWeight.bold),),
                   Spacer(),
-                  Text(formatTime(reminder.timeSent), //display time sent? or for example 8m geleden 
+                  Text(formatTime(reminder.timeCreated), //display time sent? or for example 8m geleden 
                     style: TextStyle(fontWeight: FontWeight.bold),
                   )
                 ],

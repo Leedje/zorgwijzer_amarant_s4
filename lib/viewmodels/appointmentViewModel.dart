@@ -8,12 +8,14 @@ class AppointmentViewModel extends ChangeNotifier {
 
   AppointmentViewModel(this.appointmentService);
 
-  List<AppointmentDTO> _appointments = [];
+  List<AppointmentDTO>? _appointments = [];
 
-  List<AppointmentDTO> get appointments => _appointments;
+  List<AppointmentDTO>? get appointments => _appointments;
 
   List<AppointmentDTO> getAppointmentsForDay(DateTime date) {
-    final appointmentsForDay = _appointments
+    if (_appointments == null) return [];
+
+    final appointmentsForDay = _appointments!
         .where((appointment) => isSameDay(appointment.dateTime, date))
         .toList();
     appointmentsForDay.sort((a, b) => a.dateTime.compareTo(b.dateTime));
